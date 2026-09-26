@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scrapem · Market Intelligence Agent</title>
+    <meta name="description" content="Scrapem is an autonomous market intelligence agent. It hunts live business signals, scores their impact, and returns an executive briefing.">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body id="top">
+    <div class="starfield" aria-hidden="true"></div>
+
+    <div class="nav-wrap">
+        <nav class="nav">
+            <a class="wordmark" href="#top">SCRAPEM</a>
+            <div class="nav-right">
+                <div class="status-pill" id="agent-status">
+                    <span class="dot"></span>
+                    <span id="status-text">Agent idle</span>
+                </div>
+                <a class="nav-link" href="#signals">Signals <span aria-hidden="true">&rsaquo;</span></a>
+                <a class="nav-cta" href="#console">Run a sweep <span aria-hidden="true">&rsaquo;</span></a>
+            </div>
+        </nav>
+    </div>
+
+    <main>
+        <!-- ============ hero + console ============ -->
+        <section class="section hero" id="console">
+            <span class="eyebrow">Scrapem Intelligence</span>
+            <h1>Turn market noise into<br>a decisive advantage.</h1>
+            <p class="lede">
+                The agent perceives live signals across the open web, classifies
+                each event against your business, scores its impact, and
+                returns an executive briefing with the moves worth making.
+            </p>
+
+            <form id="discovery-form" class="console-card">
+                <div class="field">
+                    <label for="profile">Business Profile</label>
+                    <input type="text" id="profile" autocomplete="off"
+                           placeholder="e.g. Global agribusiness entering precision farming"
+                           value="B2B SaaS startup building AI marketing tools">
+                </div>
+                <div class="field">
+                    <label for="topic">Signal Topic</label>
+                    <input type="text" id="topic" autocomplete="off"
+                           placeholder="e.g. Crop automation, M&amp;A, and funding"
+                           value="AI startup funding">
+                </div>
+                <div class="field">
+                    <label for="custom-prompt">Analyst Directive</label>
+                    <textarea id="custom-prompt" rows="2"
+                              placeholder="Focus on moves that change our competitive position.">Prioritize competitive threats, funding momentum, and shifts that change go-to-market strategy.</textarea>
+                </div>
+            </form>
+
+            <button type="submit" form="discovery-form" class="run-btn" id="run-btn">
+                <span class="run-label">Run autonomous sweep</span>
+                <span class="run-arrow" aria-hidden="true">&rsaquo;</span>
+                <span class="run-spinner" aria-hidden="true"></span>
+            </button>
+
+            <p class="run-note">
+                Live web intelligence<br>
+                Executive-grade briefings
+            </p>
+
+            <div class="chips" id="quick-topics">
+                <button type="button" class="chip" data-topic="AI startup funding">AI funding</button>
+                <button type="button" class="chip" data-topic="enterprise cybersecurity acquisition">Cyber M&amp;A</button>
+                <button type="button" class="chip" data-topic="fintech product launch">Fintech launches</button>
+                <button type="button" class="chip" data-topic="electric vehicle market share">EV market</button>
+                <button type="button" class="chip" data-topic="cloud computing layoffs hiring">Cloud hiring</button>
+            </div>
+
+            <div id="feedback" class="feedback" hidden></div>
+        </section>
+
+        <!-- ============ loading skeleton ============ -->
+        <section id="skeleton" class="section" hidden>
+            <span class="eyebrow">Sweep in progress</span>
+            <h2>Reading the open web,<br>scoring what matters.</h2>
+            <div class="sk sk-impact"></div>
+            <div class="feature-grid">
+                <div class="sk-feature"><div class="sk sk-icon"></div><div class="sk sk-line w60"></div><div class="sk sk-line w90"></div></div>
+                <div class="sk-feature"><div class="sk sk-icon"></div><div class="sk sk-line w60"></div><div class="sk sk-line w90"></div></div>
+                <div class="sk-feature"><div class="sk sk-icon"></div><div class="sk sk-line w60"></div><div class="sk sk-line w90"></div></div>
+            </div>
+            <div class="card-grid">
+                <div class="sk sk-card"></div>
+                <div class="sk sk-card"></div>
+                <div class="sk sk-card"></div>
+                <div class="sk sk-card"></div>
+            </div>
+        </section>
+
+        <div id="results" hidden>
+            <!-- ============ briefing ============ -->
+            <section class="section">
+                <span class="eyebrow">Executive briefing</span>
+                <h2>Executive market memory,<br>ready for the next move.</h2>
+                <p class="lede">
+                    A continuously refreshed model of competitor activity,
+                    category momentum, and strategic openings.
+                </p>
+
+                <div class="impact-card">
+                    <span class="impact-score" id="impact-score">0</span>
+                    <div class="impact-body">
+                        <p class="impact-summary" id="headline-summary"></p>
+                        <p class="evolution" id="evolution-note" hidden></p>
+                    </div>
+                </div>
+
+                <div class="briefing-tags" id="briefing-tags"></div>
+                <div class="briefing-meta" id="briefing-meta"></div>
+
+                <div class="feature-grid" id="panel-grid"></div>
+            </section>
+
+            <!-- ============ signal feed ============ -->
+            <section class="section section-left" id="signals">
+                <span class="eyebrow">Live web signals</span>
+                <h2>Live signals, translated<br>into strategic context.</h2>
+                <p class="section-sub" id="feed-count"></p>
+                <div class="card-grid" id="article-grid"></div>
+            </section>
+
+            <!-- ============ memory ============ -->
+            <section class="section section-left">
+                <span class="eyebrow">Intelligence memory</span>
+                <h2>Every sweep, kept<br>for the next decision.</h2>
+                <ul class="timeline" id="timeline"></ul>
+            </section>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <span class="wordmark">SCRAPEM</span>
+        <span>Autonomous perceive · reason · act loop. Signals sourced live from public web feeds.</span>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
